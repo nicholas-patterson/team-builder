@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../src/styles.css";
 
 const Form = props => {
@@ -10,19 +10,20 @@ const Form = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log("name", member.name);
-    console.log("email", member.email);
-    console.log("role", member.role);
     props.setTeamMembers([...props.teamMembers, member]);
+    setMember({ name: "", email: "", role: "" });
   };
+  console.log(props);
+  useEffect(() => {
+    setMember(props.memberToEdit);
+  }, [props.memberToEdit]);
 
-  console.log(props.teamMembers);
   return (
     <form onSubmit={handleSubmit}>
       <fieldset>
         <legend>Member Info</legend>
         <div className="form-group row">
-          <label for="username" className="col-sm-2 col-form-label">
+          <label htmlFor="username" className="col-sm-2 col-form-label">
             Name
           </label>
           <div className="col-sm-10">
@@ -37,7 +38,7 @@ const Form = props => {
           </div>
         </div>
         <div className="form-group">
-          <label for="exampleInputEmail1">Member Email</label>
+          <label htmlFor="exampleInputEmail1">Member Email</label>
           <input
             type="email"
             className="form-control"
@@ -49,7 +50,7 @@ const Form = props => {
           />
         </div>
         <div className="form-group">
-          <label for="exampleInputPassword1">Member Role</label>
+          <label htmlFor="exampleInputPassword1">Member Role</label>
           <input
             type="text"
             className="form-control"

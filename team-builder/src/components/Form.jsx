@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "../../src/styles.css";
 
+// id for array
+let idCounter = () => {
+  let id = 0;
+  return function countUp() {
+    return id++;
+  };
+};
+
+const arrId = idCounter();
+
 const Form = props => {
   const [member, setMember] = useState({ name: "", email: "", role: "" });
 
@@ -10,14 +20,24 @@ const Form = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.setTeamMembers([...props.teamMembers, member]);
-    setMember({ name: "", email: "", role: "" });
+    // props.setTeamMembers([...props.teamMembers, member]);
+    // setMember({ name: "", email: "", role: "" });
+    if (!props.isEditing) {
+      props.setTeamMembers([...props.teamMembers, member, { id: arrId() }]);
+      setMember({ name: "", email: "", role: "" });
+    } //else if (props.isEditing) {
+    //   const updatedList = member.filter(member => member.id !== member.id);
+
+    //   updatedList.push(member.id);
+    //   props.setMember(updatedList);
+    // }
   };
-  console.log(props);
+
   useEffect(() => {
     setMember(props.memberToEdit);
   }, [props.memberToEdit]);
 
+  console.log("PROPS IN FORM", props);
   return (
     <form onSubmit={handleSubmit}>
       <fieldset>

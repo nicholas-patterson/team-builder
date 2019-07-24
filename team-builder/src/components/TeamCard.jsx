@@ -12,16 +12,22 @@ const Cards = styled.div`
   margin-bottom: 20px;
 `;
 
-const TeamCard = ({ teamMembers, memberToEdit, setMemberToEdit }) => {
-  console.log(teamMembers);
-  const team = teamMembers.map(member => {
+const TeamCard = ({
+  teamMembers,
+  memberToEdit,
+  setMemberToEdit,
+  setEditing
+}) => {
+  const team = teamMembers.map((member, index) => {
     return (
       <Cards>
         <div>
           <h3>{member.name}</h3>
           <h3>{member.email}</h3>
           <h3>{member.role}</h3>
-          <button onClick={() => setMemberToEdit(member)}>Edit</button>
+          <button onClick={() => (setMemberToEdit(member), setEditing)}>
+            Edit
+          </button>
         </div>
       </Cards>
     );

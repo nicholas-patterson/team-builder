@@ -5,16 +5,21 @@ import TeamCard from "./TeamCard";
 const App = () => {
   const [teamMembers, setTeamMembers] = useState([]);
   const [memberToEdit, setMemberToEdit] = useState([]);
-  console.log(memberToEdit);
-
+  const [isEditing, setisEditing] = useState(false);
   return (
     <div>
       <Form
         setTeamMembers={setTeamMembers}
         teamMembers={teamMembers}
         memberToEdit={memberToEdit}
+        isEditing={isEditing}
+        setisEditing={setisEditing}
       />
-      <TeamCard teamMembers={teamMembers} setMemberToEdit={setMemberToEdit} />
+      <TeamCard
+        teamMembers={teamMembers}
+        setMemberToEdit={setMemberToEdit}
+        setisEditing={setisEditing}
+      />
     </div>
   );
 };

@@ -16,16 +16,16 @@ const TeamCard = ({
   teamMembers,
   memberToEdit,
   setMemberToEdit,
-  setEditing
+  setisEditing
 }) => {
   const team = teamMembers.map((member, index) => {
     return (
-      <Cards>
+      <Cards key={index}>
         <div>
           <h3>{member.name}</h3>
           <h3>{member.email}</h3>
           <h3>{member.role}</h3>
-          <button onClick={() => (setMemberToEdit(member), setEditing)}>
+          <button onClick={() => (setMemberToEdit(member), setisEditing(true))}>
             Edit
           </button>
         </div>

@@ -14,6 +14,7 @@ const App = () => {
         memberToEdit={memberToEdit}
         isEditing={isEditing}
         setisEditing={setisEditing}
+        setMemberToEdit={setMemberToEdit}
       />
       <TeamCard
         teamMembers={teamMembers}

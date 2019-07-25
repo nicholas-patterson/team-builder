@@ -18,24 +18,31 @@ const Form = props => {
     setMember({ ...member, [e.target.name]: e.target.value });
   };
 
+  useEffect(() => {
+    setMember(props.memberToEdit);
+  }, [props.memberToEdit]);
+
   const handleSubmit = e => {
     e.preventDefault();
     // props.setTeamMembers([...props.teamMembers, member]);
     // setMember({ name: "", email: "", role: "" });
     if (!props.isEditing) {
-      props.setTeamMembers([...props.teamMembers, member, { id: arrId() }]);
+      props.setTeamMembers([...props.teamMembers, { ...member, id: arrId() }]);
+      props.setisEditing(false);
       setMember({ name: "", email: "", role: "" });
-    } //else if (props.isEditing) {
-    //   const updatedList = member.filter(member => member.id !== member.id);
-
-    //   updatedList.push(member.id);
-    //   props.setMember(updatedList);
-    // }
+    } else if (props.isEditing) {
+      const updatedList = props.teamMembers.filter(
+        teamMember => teamMember.id === props.memberToEdit
+      );
+      updatedList.push(member);
+      //setMember({ ...props.teamMembers, updatedList });
+      console.log("UPDATED LIST", updatedList);
+      //setMember(updatedList);
+      props.setTeamMembers(updatedList); // is adding edited fields to card !
+      props.setMemberToEdit({ name: "", eamil: "", role: "", id: null });
+      setMember({ name: "", email: "", role: "" });
+    }
   };
-
-  useEffect(() => {
-    setMember(props.memberToEdit);
-  }, [props.memberToEdit]);
 
   console.log("PROPS IN FORM", props);
   return (
